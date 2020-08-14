@@ -12,7 +12,7 @@ abstract class Action
 
     private bool $executed = false;
 
-    public function execute(): self
+    final public function execute(): self
     {
         if ($this->executed) {
             throw new LogicException('Action cannot be executed more then once');
@@ -23,7 +23,7 @@ abstract class Action
         return $this;
     }
 
-    public function result(?string $format = '')
+    final public function result(?string $format = '')
     {
         if (!$this->executed) {
             throw new LogicException('Action has no result because it not yet been executed');
