@@ -1,0 +1,22 @@
+{
+    "name": "glebvvss/actionator",
+    "description": "Library for making executable actions",
+    "authors": [
+        {
+            "name": "Gleb Vasylenko",
+            "email": "glebvs93@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Actionator\\": "src/",
+            "Actionator\\Test\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+    }
+}
