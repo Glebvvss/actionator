@@ -8,12 +8,13 @@ use Actionator\Common\Implementations;
 use Actionator\Test\Mock\NoDepsAction;
 use Actionator\Test\Mock\WithDepsAction;
 use Actionator\Test\Mock\TestArrayFormat;
+use Actionator\Test\Mock\SimpleTestClass;
 
 class ImplementationsTest extends TestCase
 {
     public function test_array_classWithoutInterfaceImplementations()
     {
-        $implementations = new Implementations(NoDepsAction::class);
+        $implementations = new Implementations(SimpleTestClass::class);
         $this->assertEquals([], $implementations->array());
     }
 

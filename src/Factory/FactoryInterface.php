@@ -2,10 +2,10 @@
 
 namespace Actionator\Factory;
 
-use Actionator\Action;
+use Actionator\ActionInterface;
 
 /**
- * Factory interface for make actions in your code. You 
+ * Factory interface for make actions in your code.
  */
 interface FactoryInterface
 {
@@ -16,5 +16,5 @@ interface FactoryInterface
      * @param array $args - dependencies of action, which will provided in constructor of target action
      * @return Action
      */
-    public function make(string $className, array $args = []): Action;
+    public function make(string $className, array $args = []): ActionInterface;
 }

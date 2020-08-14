@@ -9,17 +9,15 @@ use Actionator\Common\Implementations;
 /**
  * Single atomic action (realizaton of "command" GoF pattern), which can be executed once and store inside yourself result of operation
  */
-abstract class Action
+abstract class Action implements ActionInterface
 {
     private $result;
 
     private bool $executed = false;
 
     /**
-     * Execute action. Can be executed only once.
-     * 
+     * @inheritdoc
      * @throws LogicException
-     * @return self
      */
     final public function execute(): self
     {
@@ -33,9 +31,7 @@ abstract class Action
     }
 
     /**
-     * Result of executed action. Can be prepared for client uses Format class name as first argument. 
-     * Format class must implement Actionator\FormatInterface for correct working.
-     * 
+     * @inheritdoc
      * @param string $format - format class name for prepare action result 
      * @throws LogicException
      * @throws InvalidArgumentException
