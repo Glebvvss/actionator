@@ -6,12 +6,21 @@ use LogicException;
 use InvalidArgumentException;
 use Actionator\Common\Implementations;
 
+/**
+ * Single atomic action (realizaton of "command" GoF pattern), which can be executed once and store inside yourself result of operation
+ */
 abstract class Action
 {
     private $result;
 
     private bool $executed = false;
 
+    /**
+     * Execute action. Can be executed only once.
+     * 
+     * @throws LogicException
+     * @return self
+     */
     final public function execute(): self
     {
         if ($this->executed) {
@@ -23,6 +32,15 @@ abstract class Action
         return $this;
     }
 
+    /**
+     * Result of executed action. Can be prepared for client uses Format class name as first argument. 
+     * Format class must implement Actionator\FormatInterface for correct working.
+     * 
+     * @param string $format - format class name for prepare action result 
+     * @throws LogicException
+     * @throws InvalidArgumentException
+     * @return mixed
+     */
     final public function result(?string $format = '')
     {
         if (!$this->executed) {
@@ -50,5 +68,10 @@ abstract class Action
         return $formatImpl->isImplement(FormatInterface::class);
     }
 
+    /**
+     * Source code of action, which can be executed. Return result of operation if needed.
+     * 
+     * @return mixed
+     */
     abstract protected function instruction();
 }
