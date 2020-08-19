@@ -2,16 +2,16 @@
 
 namespace Actionator\Test\Factory;
 
-use Actionator\Factory\Factory;
 use PHPUnit\Framework\TestCase;
-use Actionator\Test\Mock\NoDepsAction;
-use Actionator\Test\Mock\WithDepsAction;
+use Actionator\Factory\ActionFactory;
+use Actionator\Test\Stub\NoDepsAction;
+use Actionator\Test\Stub\WithDepsAction;
 
 class ActionFactoryTest extends TestCase
 {
     public function test_create_testingActionWithoutDependencies()
     {
-        $factory = new Factory();
+        $factory = new ActionFactory();
         $testAction = $factory->make(NoDepsAction::class);
         $this->assertEquals(new NoDepsAction, $testAction);
     }
@@ -21,7 +21,7 @@ class ActionFactoryTest extends TestCase
         $name = 'John';
         $lastName = 'Mayer';
 
-        $factory = new Factory();
+        $factory = new ActionFactory();
         $testAction = $factory->make(WithDepsAction::class, [$name, $lastName]);
         $this->assertEquals(new WithDepsAction($name, $lastName), $testAction);
     }
@@ -31,7 +31,7 @@ class ActionFactoryTest extends TestCase
         $name = 'John';
         $lastName = 'Mayer';
 
-        $factory = new Factory();
+        $factory = new ActionFactory();
         $testAction = $factory->make(WithDepsAction::class, [
             'lastName' => $lastName,
             'name' => $name

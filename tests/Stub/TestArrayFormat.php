@@ -1,8 +1,8 @@
 <?php 
 
-namespace Actionator\Test\Mock;
+namespace Actionator\Test\Stub;
 
-use Actionator\FormatInterface;
+use Actionator\Format\FormatInterface;
 
 class TestArrayFormat implements FormatInterface
 {

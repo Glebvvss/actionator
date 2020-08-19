@@ -5,9 +5,11 @@ namespace Actionator\Test;
 use LogicException;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Actionator\Test\Mock\NoDepsAction;
-use Actionator\Test\Mock\WithDepsAction;
-use Actionator\Test\Mock\TestArrayFormat;
+use Actionator\Format\FormatPipe;
+use Actionator\Test\Stub\NoDepsAction;
+use Actionator\Test\Stub\TestIntFormat;
+use Actionator\Test\Stub\WithDepsAction;
+use Actionator\Test\Stub\TestArrayFormat;
 
 class ActionTest extends TestCase
 {
@@ -17,7 +19,7 @@ class ActionTest extends TestCase
         $this->assertSame($action, $action->execute());
     }
 
-    public function test_execute_doubble_executing()
+    public function test_execute_doubbleExecuting()
     {
         $this->expectException(LogicException::class);
         $action = new NoDepsAction();
@@ -31,7 +33,7 @@ class ActionTest extends TestCase
         $this->assertTrue($action->execute()->result());
     }
 
-    public function test_result_withFormatting()
+    public function test_result_withClassFormat()
     {
         $name = 'John';
         $lastName = 'Mayer';
@@ -40,6 +42,18 @@ class ActionTest extends TestCase
         $this->assertEquals(
             ['name' => $name, 'lastName' => $lastName],
             $action->execute()->result(TestArrayFormat::class)
+        );
+    }
+
+    public function test_result_withCallbackFormat()
+    {
+        $name = 'John';
+        $lastName = 'Mayer';
+
+        $action = new WithDepsAction($name, $lastName);
+        $this->assertEquals(
+            ['name' => $name, 'lastName' => $lastName],
+            $action->execute()->result(fn($result) => (array) $result)
         );
     }
 
@@ -70,5 +84,18 @@ class ActionTest extends TestCase
 
         $action = new WithDepsAction($name, $lastName);
         $action->execute()->result('Not existiong format class');
+    }
+
+    public function test_result_usingFormatPipeline()
+    {
+        $action = new NoDepsAction();
+        $result = $action->execute()->result(new FormatPipe([
+            TestIntFormat::class,
+            function($result) {
+                return [$result];
+            }
+        ]));
+
+        $this->assertEquals([1], $result);
     }
 }

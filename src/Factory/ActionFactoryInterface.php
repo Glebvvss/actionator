@@ -7,7 +7,7 @@ use Actionator\ActionInterface;
 /**
  * Factory interface for make actions in your code.
  */
-interface FactoryInterface
+interface ActionFactoryInterface
 {
     /**
      * Create new action.

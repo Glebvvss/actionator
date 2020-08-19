@@ -4,8 +4,8 @@ namespace Actionator\Test\Common;
 
 use PHPUnit\Framework\TestCase;
 use Actionator\Common\InstanceArgs;
-use Actionator\Test\Mock\NoDepsAction;
-use Actionator\Test\Mock\WithDepsAction;
+use Actionator\Test\Stub\NoDepsAction;
+use Actionator\Test\Stub\WithDepsAction;
 
 class InstanceArgsTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Actionator\Test\Mock;
+namespace Actionator\Test\Stub;
 
 use stdClass;
 use Actionator\Action;

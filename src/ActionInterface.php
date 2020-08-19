@@ -15,10 +15,16 @@ interface ActionInterface
     public function execute(): self;
 
     /**
-     * Result of executed action. Can be prepared for client uses Format class name as first argument. 
-     * Format class must implement Actionator\FormatInterface for correct working.
+     * Returns true if action already executed
      * 
+     * @return bool
+     */
+    public function done(): bool;
+
+    /**
+     * Result of executed action. Can be prepared for client uses Format class name as first argument. 
+     * Format class must implement Actionator\Format\FormatInterface for correct working.
      * @return mixed
      */
-    public function result(?string $format = '');
+    public function result($format = null);
 }

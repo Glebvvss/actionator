@@ -1,6 +1,6 @@
 <?php 
 
-namespace Actionator;
+namespace Actionator\Format;
 
 /**
  * Format interface for prepare result of actions

@@ -2,9 +2,11 @@
 
 namespace Actionator;
 
+use is_callable;
 use LogicException;
 use InvalidArgumentException;
 use Actionator\Common\Implementations;
+use Actionator\Format\FormatInterface;
 
 /**
  * Single atomic action (realizaton of "command" GoF pattern), which can be executed once and store inside yourself result of operation
@@ -17,6 +19,15 @@ abstract class Action implements ActionInterface
 
     /**
      * @inheritdoc
+     */
+    final public function done(): bool
+    {
+        return $this->executed;
+    }
+
+    /**
+     * @inheritdoc
+     * 
      * @throws LogicException
      */
     final public function execute(): self
@@ -32,12 +43,13 @@ abstract class Action implements ActionInterface
 
     /**
      * @inheritdoc
-     * @param string $format - format class name for prepare action result 
+     * 
+     * @param string|null|callback $format - format class name for prepare action result 
      * @throws LogicException
      * @throws InvalidArgumentException
      * @return mixed
      */
-    final public function result(?string $format = '')
+    final public function result($format = null)
     {
         if (!$this->executed) {
             throw new LogicException('Action has no result because it not yet been executed');
@@ -45,6 +57,10 @@ abstract class Action implements ActionInterface
 
         if (empty($format)) {
             return $this->result;
+        }
+
+        if (is_callable($format)) {
+            return $format($this->result);
         }
 
         if (!class_exists($format)) {

@@ -9,7 +9,7 @@ use Actionator\Common\InstanceArgs;
 /**
  * Simple implementation of action factory
  */
-class Factory implements FactoryInterface
+class ActionFactory implements ActionFactoryInterface
 {
     /**
      * @inheritdoc
