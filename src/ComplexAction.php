@@ -1,18 +1,42 @@
 <?php
 
+/**
+ * Complex Action
+ * 
+ * Sometimes you want to use collection of actions like an sindle atomic action.
+ * Complex action is simple implementation for this.
+ */
 namespace Actionator;
 
 use LogicException;
-use Actionator\Format\FormatInterface;
 
 /**
- * Class which using for group actions single single complex atomic command
+ * Class ComplexAction
+ *
+ * Uses for group actions single single complex atomic command
+ * @package Actionator
  */
 final class ComplexAction implements ActionInterface
 {
-    private bool $executed = false;
-    private array $actions;
+    /**
+     * Action executed identifier
+     * 
+     * @var bool
+     */
+    private $executed = false;
 
+    /**
+     * Collection of stored actions
+     * 
+     * @var array
+     */
+    private $actions;
+
+    /**
+     * ComplexAction constructor.
+     *
+     * @param array $actions
+     */
     public function __construct(array $actions)
     {
         foreach($actions as $action) {
@@ -25,7 +49,9 @@ final class ComplexAction implements ActionInterface
     }
 
     /**
-     * @inheritdoc
+     * Execute all encapsulated actions
+     *
+     * @return $this
      */
     public function execute(): self
     {
@@ -42,7 +68,9 @@ final class ComplexAction implements ActionInterface
     }
 
     /**
-     * @inheritdoc
+     * Returns true if action already executed
+     * 
+     * @return bool
      */
     public function done(): bool
     {
@@ -50,10 +78,16 @@ final class ComplexAction implements ActionInterface
     }
 
     /**
-     * @inheritdoc
+     * Result of executed action. Can be prepared for client uses Format class name as first argument. 
+     * Format class must implement Actionator\Format\FormatInterface for correct working.
+     *
+     * @param string|callable $format
+     * @return array
      */
     public function result($format = null): array
     {
-        return array_map(fn($action) => $action->result($format), $this->actions);
+        return array_map(function($action) use ($format) {
+            return $action->result($format);
+        }, $this->actions);
     }
 }

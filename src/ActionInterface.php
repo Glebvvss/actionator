@@ -1,9 +1,14 @@
 <?php
 
+/**
+ * Action contract
+ * 
+ * Single atomic action (realizaton of "command" GoF pattern) for you own needs
+ */
 namespace Actionator;
 
 /**
- * Single atomic action (realizaton of "command" GoF pattern)
+ * Base interface for actions
  */
 interface ActionInterface
 {
@@ -24,6 +29,8 @@ interface ActionInterface
     /**
      * Result of executed action. Can be prepared for client uses Format class name as first argument. 
      * Format class must implement Actionator\Format\FormatInterface for correct working.
+     * 
+     * @param  string|callable $format
      * @return mixed
      */
     public function result($format = null);

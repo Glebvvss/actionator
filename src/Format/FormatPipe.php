@@ -1,17 +1,33 @@
-<?php 
+<?php
 
+/**
+ * Pipeline handler, which apply encapsulated formats
+ */
 namespace Actionator\Format;
 
 use is_callable;
-use InvalidArgumentException;
 
 /**
- * Format Pipeline class, which walks through the list of formats and applies them in turn
+ * Class FormatPipe
+ *
+ * Pipeline handler, which apply encapsulated formats
+ *
+ * @package Actionator\Format
  */
 final class FormatPipe
 {
-    private array $formats;
+	/**
+	 * Collection of stored formats
+	 *
+	 * @var array
+	 */
+    private $formats;
 
+    /**
+     * Constructor of class
+     * 
+     * @param array $formats list of format preparers
+     */
     public function __construct(array $formats)
     {
         $this->formats = $formats;
@@ -19,8 +35,9 @@ final class FormatPipe
 
     /**
      * Method for running format pipeline
-     * @param mixed $result 
-     * @return mixed
+     * 
+     * @param  mixed $result result of action
+     * @return mixed prepared by format handlers action result
      */
     public function __invoke($result)
     {

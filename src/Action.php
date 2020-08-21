@@ -1,5 +1,12 @@
 <?php 
 
+/**
+ * Abstract Action
+ * 
+ * Base class for your own actions, which garantee that action will be executed once.
+ * For build your own actions you should extends this abstract class and implement code 
+ * of your action in instionction abstract method
+ */
 namespace Actionator;
 
 use is_callable;
@@ -9,16 +16,31 @@ use Actionator\Common\Implementations;
 use Actionator\Format\FormatInterface;
 
 /**
+ * Class Action
+ *
  * Single atomic action (realizaton of "command" GoF pattern), which can be executed once and store inside yourself result of operation
+ * @package Actionator
  */
 abstract class Action implements ActionInterface
 {
+    /**
+     * Result of executed action
+     * 
+     * @var mixed
+     */
     private $result;
 
-    private bool $executed = false;
+    /**
+     * Action executed identifier
+     * 
+     * @var bool
+     */
+    private $executed = false;
 
     /**
-     * @inheritdoc
+     * Returns true if action already executed
+     * 
+     * @return bool
      */
     final public function done(): bool
     {
@@ -26,9 +48,10 @@ abstract class Action implements ActionInterface
     }
 
     /**
-     * @inheritdoc
+     * Execute action
      * 
      * @throws LogicException
+     * @return self
      */
     final public function execute(): self
     {
@@ -42,12 +65,13 @@ abstract class Action implements ActionInterface
     }
 
     /**
-     * @inheritdoc
+     * Result of executed action. Can be prepared for client uses Format class name as first argument. 
+     * Format class must implement Actionator\Format\FormatInterface for correct working
      * 
      * @param string|null|callback $format - format class name for prepare action result 
      * @throws LogicException
      * @throws InvalidArgumentException
-     * @return mixed
+     * @return mixed result of action
      */
     final public function result($format = null)
     {
@@ -74,14 +98,20 @@ abstract class Action implements ActionInterface
         return (new $format($this->result))->formattedResult();
     }
 
-    private function isFormatClass($format)
+    /**
+     * Returns true if provided format class implements Actionator\Format\FormatInterface
+     * 
+     * @param string $format format class name
+     * @return bool
+     */
+    private function isFormatClass(string $format): bool
     {
         $formatImpl = new Implementations($format);
         return $formatImpl->isImplement(FormatInterface::class);
     }
 
     /**
-     * Source code of action, which can be executed. Return result of operation if needed.
+     * Source code of action, which can be executed. Returns result of operation if needed.
      * 
      * @return mixed
      */
