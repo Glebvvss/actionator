@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Pipeline handler, which apply encapsulated formats
- */
 namespace Actionator\Format;
 
 use is_callable;
@@ -10,23 +7,18 @@ use is_callable;
 /**
  * Class FormatPipe
  *
- * Pipeline handler, which apply encapsulated formats
+ * Format class, which chains apply collection of other format classes
  *
  * @package Actionator\Format
  */
 final class FormatPipe
 {
-	/**
-	 * Collection of stored formats
-	 *
-	 * @var array
-	 */
-    private $formats;
+    private array $formats;
 
     /**
-     * Constructor of class
-     * 
-     * @param array $formats list of format preparers
+     * FormatPipe constructor.
+     *
+     * @param array $formats
      */
     public function __construct(array $formats)
     {
@@ -34,10 +26,10 @@ final class FormatPipe
     }
 
     /**
-     * Method for running format pipeline
-     * 
-     * @param  mixed $result result of action
-     * @return mixed prepared by format handlers action result
+     * Start format pipe
+     *
+     * @param  mixed $result
+     * @return mixed
      */
     public function __invoke($result)
     {

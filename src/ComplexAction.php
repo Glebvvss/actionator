@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Complex Action
- * 
- * Sometimes you want to use collection of actions like an sindle atomic action.
- * Complex action is simple implementation for this.
- */
 namespace Actionator;
 
 use LogicException;
@@ -13,28 +7,17 @@ use LogicException;
 /**
  * Class ComplexAction
  *
- * Uses for group actions single single complex atomic command
+ * Group collection of simple actions in grouped action, which can be executed like single action
+ *
  * @package Actionator
  */
 final class ComplexAction implements ActionInterface
 {
-    /**
-     * Action executed identifier
-     * 
-     * @var bool
-     */
-    private $executed = false;
+    private bool  $executed = false;
+    private array $actions;
 
     /**
-     * Collection of stored actions
-     * 
-     * @var array
-     */
-    private $actions;
-
-    /**
-     * ComplexAction constructor.
-     *
+     * ComplexAction constructor
      * @param array $actions
      */
     public function __construct(array $actions)
@@ -49,9 +32,7 @@ final class ComplexAction implements ActionInterface
     }
 
     /**
-     * Execute all encapsulated actions
-     *
-     * @return $this
+     * @see ActionInterface
      */
     public function execute(): self
     {
@@ -68,9 +49,7 @@ final class ComplexAction implements ActionInterface
     }
 
     /**
-     * Returns true if action already executed
-     * 
-     * @return bool
+     * @see ActionInterface
      */
     public function done(): bool
     {
@@ -78,11 +57,7 @@ final class ComplexAction implements ActionInterface
     }
 
     /**
-     * Result of executed action. Can be prepared for client uses Format class name as first argument. 
-     * Format class must implement Actionator\Format\FormatInterface for correct working.
-     *
-     * @param string|callable $format
-     * @return array
+     * @see ActionInterface
      */
     public function result($format = null): array
     {

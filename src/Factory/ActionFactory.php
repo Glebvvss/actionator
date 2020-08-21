@@ -1,10 +1,5 @@
 <?php
 
-/**
- * Simple Action Factory
- * 
- * Simple default implementation of Actionator\ActionFactoryInterface for creating your own actions
- */
 namespace Actionator\Factory;
 
 use ReflectionClass;
@@ -15,18 +10,14 @@ use Actionator\Common\InstanceArgs;
 /**
  * Class ActionFactory
  *
- * Simple action factory implementation
+ * Simple implementation of Actionator\Factory\ActionFactoryInterface
+ *
  * @package Actionator\Factory
  */
 class ActionFactory implements ActionFactoryInterface
 {
     /**
-     * Create new action
-     *
-     * @param  string $className
-     * @param  array  $args
-     * @return ActionInterface
-     * @throws ReflectionException
+     * @see ActionFactoryInterface
      */
     final public function make(string $className, array $args = []): ActionInterface
     {

@@ -1,36 +1,34 @@
 <?php
 
-/**
- * Action contract
- * 
- * Single atomic action (realizaton of "command" GoF pattern) for you own needs
- */
 namespace Actionator;
 
 /**
- * Base interface for actions
+ * Interface ActionInterface
+ *
+ * Base Action contract
+ *
+ * @package Actionator
  */
 interface ActionInterface
 {
     /**
-     * Execute action
-     * 
-     * @return self
+     * Start execution
+     *
+     * @return $this
      */
     public function execute(): self;
 
     /**
-     * Returns true if action already executed
-     * 
+     * Check status action on done
+     *
      * @return bool
      */
     public function done(): bool;
 
     /**
-     * Result of executed action. Can be prepared for client uses Format class name as first argument. 
-     * Format class must implement Actionator\Format\FormatInterface for correct working.
-     * 
-     * @param  string|callable $format
+     * Fetch result of executed action
+     *
+     * @param string|callable|null $format
      * @return mixed
      */
     public function result($format = null);
