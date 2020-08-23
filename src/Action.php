@@ -4,8 +4,11 @@ namespace Actionator;
 
 use LogicException;
 use InvalidArgumentException;
+use Actionator\Result\ResultFailed;
+use Actionator\Result\ResultSuccess;
 use Actionator\Common\Implementations;
 use Actionator\Format\FormatInterface;
+use Actionator\Result\ResultInterface;
 
 /**
  * Class Action
@@ -76,9 +79,31 @@ abstract class Action implements ActionInterface
     }
 
     /**
-     * Source code of action, which returns action result if needed
+     * Returns by instruction method if action correct executed
+     * 
+     * @param  mixed $value
+     * @return ResultInterface
+     */
+    protected function success($value): ResultInterface
+    {
+        return new ResultSuccess($value);
+    }
+
+    /**
+     * Returns by instruction method if action no correct executed
+     * 
+     * @param  mixed $value
+     * @return ResultInterface
+     */
+    protected function fail($value): ResultInterface
+    {
+        return new ResultFailed($value);
+    }
+
+    /**
+     * Source code of action, which returns action result
      *
      * @return mixed
      */
-    abstract protected function instruction();
+    abstract protected function instruction(): ResultInterface;
 }

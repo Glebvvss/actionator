@@ -3,7 +3,6 @@
 namespace Actionator\Factory;
 
 use ReflectionClass;
-use ReflectionException;
 use Actionator\ActionInterface;
 use Actionator\Common\InstanceArgs;
 
