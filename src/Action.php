@@ -2,7 +2,6 @@
 
 namespace Actionator;
 
-use is_callable;
 use LogicException;
 use InvalidArgumentException;
 use Actionator\Common\Implementations;
@@ -17,8 +16,8 @@ use Actionator\Format\FormatInterface;
  */
 abstract class Action implements ActionInterface
 {
-    private array $result;
-    private bool  $executed = false;
+    private $result;
+    private bool $executed = false;
 
     /**
      * @see ActionInterface
@@ -55,7 +54,7 @@ abstract class Action implements ActionInterface
             return $this->result;
         }
 
-        if (is_callable($format)) {
+        if (\is_callable($format)) {
             return $format($this->result);
         }
 

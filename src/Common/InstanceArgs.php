@@ -3,6 +3,7 @@
 namespace Actionator\Common;
 
 use ReflectionClass;
+use InvalidArgumentException;
 
 class InstanceArgs
 {
@@ -45,7 +46,7 @@ class InstanceArgs
         $constructor = $class->getConstructor();
         foreach($constructor->getParameters() as $parameter) {
             if (!isset($this->args[$parameter->getName()])) {
-                throw new InvalidArgumentException("Incorrect sugnature of {$className} class");
+                throw new InvalidArgumentException("Incorrect sugnature of {$this->className} class");
             }
 
             $result[] = $this->args[$parameter->getName()];

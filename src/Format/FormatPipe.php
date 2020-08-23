@@ -33,11 +33,12 @@ final class FormatPipe
      */
     public function __invoke($result)
     {
-        return array_reduce($this->formats, function($result, $format) {
-            if (is_callable($format)) {
-                return $format($result);
-            }
-            return (new $format($result))->formattedResult();
-        }, $result);
+        return array_reduce(
+            $this->formats, 
+            fn($result, $format) => is_callable($format) 
+                ? $format($result)
+                : (new $format($result))->formattedResult(), 
+            $result
+        );
     }
 }

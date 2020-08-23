@@ -61,8 +61,9 @@ final class ComplexAction implements ActionInterface
      */
     public function result($format = null): array
     {
-        return array_map(function($action) use ($format) {
-            return $action->result($format);
-        }, $this->actions);
+        return array_map(
+            fn($action) => $action->result($format), 
+            $this->actions
+        );
     }
 }
