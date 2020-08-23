@@ -2,8 +2,6 @@
 
 namespace Actionator\Format;
 
-use is_callable;
-
 /**
  * Class FormatPipe
  *
@@ -35,7 +33,7 @@ final class FormatPipe
     {
         return array_reduce(
             $this->formats, 
-            fn($result, $format) => is_callable($format) 
+            fn($result, $format) => \is_callable($format)
                 ? $format($result)
                 : (new $format($result))->formattedResult(), 
             $result

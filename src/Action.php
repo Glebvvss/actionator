@@ -71,12 +71,13 @@ abstract class Action implements ActionInterface
 
     private function isFormatClass(?string $format): bool
     {
-        $formatImpl = new Implementations($format);
-        return $formatImpl->isImplement(FormatInterface::class);
+        $formatImplementations = new Implementations($format);
+        return $formatImplementations
+            ->isImplement(FormatInterface::class);
     }
 
     /**
-     * Source code of action, which returns action result if needed
+     * Source code of action, which returns action result
      *
      * @return mixed
      */

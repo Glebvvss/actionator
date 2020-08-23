@@ -41,9 +41,10 @@ class InstanceArgs
 
     private function arraySortedByTargetConstructor(): array
     {
-        $result = [];
         $class = new ReflectionClass($this->className);
         $constructor = $class->getConstructor();
+
+        $result = [];
         foreach($constructor->getParameters() as $parameter) {
             if (!isset($this->args[$parameter->getName()])) {
                 throw new InvalidArgumentException("Incorrect sugnature of {$this->className} class");
