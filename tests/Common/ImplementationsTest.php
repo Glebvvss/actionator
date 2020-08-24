@@ -2,11 +2,10 @@
 
 namespace Actionator\Test\Common;
 
-use Actionator\Format\FormatInterface;
 use PHPUnit\Framework\TestCase;
 use Actionator\Common\Implementations;
 use Actionator\Test\Stub\NoDepsAction;
-use Actionator\Test\Stub\WithDepsAction;
+use Actionator\Format\FormatInterface;
 use Actionator\Test\Stub\TestArrayFormat;
 use Actionator\Test\Stub\SimpleTestClass;
 

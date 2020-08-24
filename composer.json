@@ -9,8 +9,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Actionator\\": "src/",
-            "Actionator\\Test\\": "tests/"
+            "Actionator\\Test\\": "tests/",
+            "Actionator\\": "src/"
         }
     },
     "require": {
