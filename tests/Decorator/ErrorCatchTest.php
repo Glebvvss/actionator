@@ -2,7 +2,7 @@
 
 namespace Actionstor\Test\Decorator;
 
-use Actionator\Common\Error;
+use Actionator\Error\Error;
 use PHPUnit\Framework\TestCase;
 use Actionator\Decorator\ErrorCatch;
 use Actionator\Test\Stub\NoDepsAction;

@@ -1,8 +1,11 @@
 <?php 
 
-namespace Actionator\Common;
+namespace Actionator\Error;
 
-class Error
+/**
+ * Simple action error implementation
+ */
+class Error implements ErrorInterface
 {
     private string $message;
 
@@ -11,6 +14,9 @@ class Error
         $this->message = $message;
     }
 
+    /**
+     * @see ErrorInterface
+     */
     public function toArray(): array
     {
         return ['error' => $this->message];

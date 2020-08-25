@@ -2,8 +2,9 @@
 
 namespace Actionator\Decorator;
 
-use Actionator\Common\Error;
+use Actionator\Error\Error;
 use Actionator\ActionInterface;
+use Actionator\Error\ErrorInterface;
 use Actionator\Exception\ActionException;
 
 /**
@@ -11,7 +12,7 @@ use Actionator\Exception\ActionException;
  */
 class ErrorCatch implements ActionInterface
 {
-    private ?Error $error;
+    private ?ErrorInterface $error;
     private ActionInterface $action;
 
     /**

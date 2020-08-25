@@ -1,8 +1,8 @@
 <?php
 
-namespace Actionator\Test\Common;
+namespace Actionator\Test\Error;
 
-use Actionator\Common\Error;
+use Actionator\Error\Error;
 use PHPUnit\Framework\TestCase;
 
 class ErrorTest extends TestCase
