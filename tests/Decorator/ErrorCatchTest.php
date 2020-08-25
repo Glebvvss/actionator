@@ -4,15 +4,15 @@ namespace Actionstor\Test\Decorator;
 
 use Actionator\Common\Error;
 use PHPUnit\Framework\TestCase;
+use Actionator\Decorator\ErrorCatch;
 use Actionator\Test\Stub\NoDepsAction;
-use Actionator\Decorator\ActionExceptionDecorator;
 use Actionator\Test\Stub\ActionExceptionThrowsAction;
 
-class ActionExceptionDecoratorTest extends TestCase
+class ErrorCatchTest extends TestCase
 {
     public function test_result_successResult()
     {
-        $action = new ActionExceptionDecorator(
+        $action = new ErrorCatch(
             new NoDepsAction()
         );
 
@@ -21,7 +21,7 @@ class ActionExceptionDecoratorTest extends TestCase
 
     public function test_result_catchError()
     {
-        $action = new ActionExceptionDecorator(
+        $action = new ErrorCatch(
             new ActionExceptionThrowsAction()
         );
 
@@ -33,7 +33,7 @@ class ActionExceptionDecoratorTest extends TestCase
 
     public function test_done_returnsTrue()
     {
-        $action = new ActionExceptionDecorator(
+        $action = new ErrorCatch(
             new NoDepsAction()
         );
 
@@ -44,7 +44,7 @@ class ActionExceptionDecoratorTest extends TestCase
 
     public function test_done_returnsFalse()
     {
-        $action = new ActionExceptionDecorator(
+        $action = new ErrorCatch(
             new ActionExceptionThrowsAction()
         );
 

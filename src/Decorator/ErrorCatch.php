@@ -9,7 +9,7 @@ use Actionator\Exception\ActionException;
 /**
  * Decorator, which catch Action\Exception\ActionException and save throws message
  */
-class ActionExceptionDecorator implements ActionInterface
+class ErrorCatch implements ActionInterface
 {
     private ?Error $error;
     private ActionInterface $action;
